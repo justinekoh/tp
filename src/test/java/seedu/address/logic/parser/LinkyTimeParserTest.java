@@ -7,6 +7,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.typical.TypicalIndexes.INDEX_FIRST_MEETING;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
@@ -18,6 +20,7 @@ import seedu.address.logic.commands.meeting.FindMeetingCommand;
 import seedu.address.logic.commands.meeting.ListMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingContainsAllKeywordsPredicate;
 import seedu.address.testutil.meeting.MeetingBuilder;
 import seedu.address.testutil.meeting.MeetingUtil;
 
@@ -51,8 +54,10 @@ public class LinkyTimeParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        assertTrue(parser.parseCommand(FindMeetingCommand.COMMAND_WORD) instanceof FindMeetingCommand);
-        assertTrue(parser.parseCommand(FindMeetingCommand.COMMAND_WORD + " 3") instanceof FindMeetingCommand);
+        FindMeetingCommand command = (FindMeetingCommand) parser.parseCommand(
+                FindMeetingCommand.COMMAND_WORD + " Tutorial");
+        assertEquals(new FindMeetingCommand(new MeetingContainsAllKeywordsPredicate(List.of("Tutorial"))),
+                command);
     }
 
     @Test
