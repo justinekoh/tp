@@ -14,6 +14,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.meeting.AddMeetingCommand;
 import seedu.address.logic.commands.meeting.DeleteMeetingCommand;
+import seedu.address.logic.commands.meeting.FindMeetingCommand;
 import seedu.address.logic.commands.meeting.ListMeetingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meeting.Meeting;
@@ -46,6 +47,12 @@ public class LinkyTimeParserTest {
         DeleteMeetingCommand command = (DeleteMeetingCommand) parser.parseCommand(
                 DeleteMeetingCommand.COMMAND_WORD + " " + INDEX_FIRST_MEETING.getOneBased());
         assertEquals(new DeleteMeetingCommand(INDEX_FIRST_MEETING), command);
+    }
+
+    @Test
+    public void parseCommand_find() throws Exception {
+        assertTrue(parser.parseCommand(FindMeetingCommand.COMMAND_WORD) instanceof FindMeetingCommand);
+        assertTrue(parser.parseCommand(FindMeetingCommand.COMMAND_WORD + " 3") instanceof FindMeetingCommand);
     }
 
     @Test
